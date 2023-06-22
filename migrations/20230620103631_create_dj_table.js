@@ -10,11 +10,12 @@ exports.up = function (knex) {
       .unsigned()
       .references("users.id")
       .onUpdate("CASCADE")
-      .onDelete("CASCADE");
+      .onDelete("CASCADE")
+      .unique();
     table.string("dj_name").notNullable();
     table.string("profile_image").nullable();
     table.string("location").notNullable();
-    table.string("price").notNullable();
+    table.integer("price").notNullable().unsigned();
     table.string("bio").nullable();
   });
 };

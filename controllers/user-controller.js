@@ -23,9 +23,21 @@ const register = async (req, res) => {
   };
 
   try {
-    await knex("users").insert(newUser);
+    // check if email address already exist
+    const userFound = await knex("users")
+      .select("email")
+      .where("email", email)
+      .first();
+    if (userFound) {
+      return res.status(409).json({
+        error: true,
+        message: "Email address already exist. Please login",
+      });
+    }
+    const response = await knex("users").insert(newUser);
     res.status(201).json({
       message: "Registered successfully",
+      user_id: response[0],
     });
   } catch (error) {
     res.status(500).json({
