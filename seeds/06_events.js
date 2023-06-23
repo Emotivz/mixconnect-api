@@ -24,7 +24,7 @@ exports.seed = async function (knex) {
       title: "PLAYAZ: LONDON",
       date_time: "2023-07-09 20:00:00",
       location: "XOYO, London",
-      cover_photo: "http://localhost:8080/event-images/image-77.svg",
+      cover_photo: "http://localhost:8080/event-images/club.jpg",
       details:
         "Looking for a last minute DJ for one of the best nights at our club. Please only apply if you have previous experience at top clubs",
     },
