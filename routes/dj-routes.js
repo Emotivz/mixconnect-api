@@ -4,10 +4,10 @@ const multer = require("multer");
 
 // to handle file upload on server
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
+  destination: (_req, _file, cb) => {
     cb(null, "./public/profile-images");
   },
-  filename: (req, file, cb) => {
+  filename: (_req, file, cb) => {
     cb(
       null,
       new Date().toISOString().replace(/:/g, "-") + "-" + file.originalname
@@ -15,7 +15,7 @@ const storage = multer.diskStorage({
   },
 });
 
-const filefilter = (req, file, cb) => {
+const filefilter = (_req, file, cb) => {
   if (
     file.mimetype === "image/png" ||
     file.mimetype === "image/jpg" ||
@@ -30,5 +30,6 @@ const filefilter = (req, file, cb) => {
 const upload = multer({ storage, filefilter });
 
 router.route("/").post(upload.single("profile_image"), djController.register);
+router.route("/:userId").get(djController.single);
 
 module.exports = router;

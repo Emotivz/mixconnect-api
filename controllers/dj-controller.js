@@ -1,7 +1,7 @@
 const knex = require("knex")(require("../knexfile"));
 
 const register = async (req, res) => {
-  const { user_id, dj_name, profile_image, location, price, bio } = req.body;
+  const { user_id, dj_name, location, price, bio } = req.body;
 
   if (!user_id || !dj_name || !location || !price) {
     return res.status(400).json({
@@ -10,19 +10,31 @@ const register = async (req, res) => {
     });
   }
 
-  const newDj = {
+  let newDj = {
     user_id,
     dj_name,
     profile_image:
-      req.protocol +
-      "://" +
-      req.get("host") +
-      "/profile-images/" +
-      req.file.filename,
+      "http://localhost:8080/profile-images/placeholder-profile.jpg",
     location,
     price,
     bio,
   };
+
+  if (req.file) {
+    newDj = {
+      user_id,
+      dj_name,
+      profile_image:
+        req.protocol +
+        "://" +
+        req.get("host") +
+        "/profile-images/" +
+        req.file.filename,
+      location,
+      price,
+      bio,
+    };
+  }
 
   try {
     const userFound = await knex("djs")
@@ -48,4 +60,24 @@ const register = async (req, res) => {
     });
   }
 };
-module.exports = { register };
+
+const single = async (req, res) => {
+  try {
+    const dj = await knex("djs").where({ user_id: req.params.userId });
+    if (dj.length === 0) {
+      return res.status(404).json({
+        error: true,
+        message: `DJ with the user ID: ${req.params.userId} is not found`,
+      });
+    }
+    res.status(200).json(dj[0]);
+  } catch (error) {
+    res.status(500).json({
+      error: true,
+      message: `Error getting DJ with the user ID: ${req.params.userId}`,
+      detail: `${error.message}`,
+    });
+  }
+};
+
+module.exports = { register, single };

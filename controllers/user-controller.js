@@ -84,7 +84,7 @@ const login = async (req, res) => {
 
 const current = async (req, res) => {
   const user = await knex("users")
-    .select("full_name", "is_dj")
+    .select("id", "full_name", "is_dj", "email")
     .where({ id: req.user.id })
     .first();
   res.status(200).json(user);
