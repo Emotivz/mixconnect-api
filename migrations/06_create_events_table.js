@@ -16,6 +16,7 @@ exports.up = function (knex) {
     table.datetime("date_time").notNullable();
     table.string("location").notNullable();
     table.string("cover_photo ").nullable();
+    table.string("details").notNullable();
   });
 };
 
