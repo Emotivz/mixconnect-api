@@ -13,4 +13,15 @@ const all = async (_req, res) => {
   }
 };
 
-module.exports = { all };
+const single = async (req, res) => {
+  try {
+    const event = await knex("events").where({ id: req.params.eventId });
+    res.status(200).json({
+      error: true,
+      message: `Error finding event with the ID: ${req.params.eventId}`,
+      detail: `${error.message}`,
+    });
+  } catch (error) {}
+};
+
+module.exports = { all, single };
