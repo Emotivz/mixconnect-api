@@ -11,7 +11,7 @@ exports.up = function (knex) {
       .references("users.id")
       .onUpdate("CASCADE")
       .onDelete("CASCADE");
-    table.integer("type_id").unsigned().references("type.id");
+    table.integer("event_type_id").unsigned().references("event_types.id");
     table.string("title").notNullable();
     table.datetime("date_time").notNullable();
     table.string("location").notNullable();
