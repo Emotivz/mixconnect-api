@@ -1,7 +1,7 @@
-/**
- * @param { import("knex").Knex } knex
- * @returns { Promise<void> }
- */
+// /**
+//  * @param { import("knex").Knex } knex
+//  * @returns { Promise<void> }
+//  */
 exports.seed = async function (knex) {
   // Deletes ALL existing entries
   await knex("event_dj").del();
@@ -9,7 +9,6 @@ exports.seed = async function (knex) {
     { id: 1, event_id: 4, dj_id: 1 },
     { id: 2, event_id: 4, dj_id: 2 },
     { id: 3, event_id: 4, dj_id: 3 },
-    { id: 3, event_id: 3, dj_id: 1 },
     { id: 4, event_id: 3, dj_id: 2 },
     { id: 5, event_id: 2, dj_id: 3 },
     { id: 6, event_id: 2, dj_id: 4 },
