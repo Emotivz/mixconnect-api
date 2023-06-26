@@ -38,4 +38,35 @@ const single = async (req, res) => {
   }
 };
 
-module.exports = { all, single };
+const remove = async (req, res) => {
+  // TODO add validation to check that the event exist
+  try {
+    const checkEvent = await knex("events")
+      .where({ id: req.params.eventId })
+      .first();
+
+    if (req.user.id === checkEvent.host_id) {
+      try {
+        await knex("events").where({ id: req.params.eventId }).first().del();
+      } catch (error) {
+        res.status(500).json({
+          error: true,
+          message: `Error deleting event with ID: ${req.params.eventId}`,
+          detail: `${error.message}`,
+        });
+      }
+    } else {
+      return res.status(403).json({
+        error: true,
+        message: `You are not authorised to carry out this action. Only the host can delete the event`,
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      error: true,
+      details: `${error.message}`,
+    });
+  }
+};
+
+module.exports = { all, single, remove };
