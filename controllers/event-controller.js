@@ -14,6 +14,7 @@ const all = async (req, res) => {
       const requestedNumEvents = events.slice(0, req.query.num);
       return res.status(200).json(requestedNumEvents);
     }
+    // return all events if query param is not provided
     res.status(200).json(events);
   } catch (error) {
     res.status(500).json({

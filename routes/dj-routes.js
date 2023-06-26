@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const djController = require("../controllers/dj-controller");
 const multer = require("multer");
+const authenticate = require("../middleware/authenticate");
 
 // to handle file upload on server
 const storage = multer.diskStorage({
