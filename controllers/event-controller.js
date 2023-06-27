@@ -27,7 +27,21 @@ const all = async (req, res) => {
 
 const single = async (req, res) => {
   try {
-    const event = await knex("events").where({ id: req.params.eventId });
+    const event = await knex("events")
+      .leftJoin("users", "users.id", "events.host_id")
+      .leftJoin("event_types", "event_types.id", "events.event_type_id")
+      .where({ "events.id": req.params.eventId })
+      .select(
+        "events.id",
+        "events.cover_photo AS coverPhoto",
+        "events.date_time AS dateTime",
+        "events.details",
+        "events.location",
+        "events.title",
+        "event_types.event_type AS type",
+        "users.full_name AS organiser"
+      )
+      .first();
     res.status(200).json(event);
   } catch (error) {
     res.status(500).json({
