@@ -16,7 +16,7 @@ exports.up = function (knex) {
     table.string("profile_image").nullable();
     table.string("location").notNullable();
     table.integer("price").notNullable().unsigned();
-    table.string("bio").nullable();
+    table.longtext("bio").nullable();
   });
 };
 
