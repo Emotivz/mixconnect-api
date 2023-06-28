@@ -1,5 +1,3 @@
-const { json } = require("express");
-
 const knex = require("knex")(require("../knexfile"));
 
 const single = async (req, res) => {
@@ -73,4 +71,34 @@ const editSingle = async (req, res) => {
   }
 };
 
-module.exports = { single, editSingle };
+const djProfile = async (req, res) => {
+  try {
+    const requestedProfile = await knex("djs")
+      .leftJoin("users", "users.id", "djs.user_id")
+      .leftJoin("dj_genres", "dj_genres.dj_id", "djs.id")
+      .leftJoin("genres", "genres.id", "dj_genres.genre_id")
+      .select(
+        "djs.id",
+        "djs.user_id",
+        "dj_name",
+        "profile_image",
+        "location",
+        "price",
+        "bio",
+        "users.is_dj",
+        "users.email",
+        knex.raw("JSON_ARRAYAGG( genres.genre ) AS genres")
+      )
+      .where({ "djs.id": req.params.djId })
+      .first();
+    res.status(200).json(requestedProfile);
+  } catch (error) {
+    res.status(500).json({
+      error: true,
+      message: `Error fetching profile of DJ with ID: ${req.params.djId}`,
+      details: `${error.message}`,
+    });
+  }
+};
+
+module.exports = { single, editSingle, djProfile };

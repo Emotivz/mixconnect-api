@@ -6,5 +6,6 @@ router
   .route("/")
   .get(authenticate, profileController.single)
   .put(authenticate, profileController.editSingle);
+router.route("/:djId").get(profileController.djProfile);
 
 module.exports = router;
