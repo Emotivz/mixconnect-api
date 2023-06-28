@@ -78,5 +78,12 @@ exports.seed = async function (knex) {
       password: bcrypt.hashSync("98765432"),
       is_dj: true,
     },
+    {
+      id: 11,
+      full_name: "Michael Orimolade",
+      email: "siwsher@hotmail.com",
+      password: bcrypt.hashSync("Y>vva!WHqSM0VqF4(xco"),
+      is_dj: true,
+    },
   ]);
 };

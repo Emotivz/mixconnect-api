@@ -51,5 +51,21 @@ exports.seed = async function (knex) {
       price: 200,
       bio: "Bringing the rhythm to the heart of the city! With a diverse range of electronic beats, I'll make your night unforgettable.",
     },
+    {
+      id: 6,
+      user_id: 11,
+      dj_name: "Emotivz",
+      profile_image: "http://localhost:8080/profile-images/emotivz.jpg",
+      location: "London",
+      price: 130,
+      bio: `
+Emotivz is a DJ and music producer based in London, UK. Initially a DJ, Emotivz started producing his own music, and he progressively developed a more personal and one-of-a-kind sound, combining different influences and bringing many new ideas to life. He has a life-long passion for quality music, and the fact that he is fluent in different genres and styles makes his productions all the more exciting and dynamic. His DJ sets are just as vibrant and direct as his music productions, as Emotivz takes big detours, crossing genre boundaries and exploring new ideas with his one-of-a-kind musical style and his natural ability to combine different vibes into something that’s quite pleasant and engaging for a very diverse audience. His aim is indeed to take the listeners along for a wild ride, a true musical journey that will cause waves of euphoria and feel-good vibes through and through! As his artist moniker might suggest, Emotivz knows that music is all about emotion, and he looks forward to sharing it with the audience.
+ 
+ Find out more about Emotivz and his work as a DJ and producer alike.
+ 
+ https://www.instagram.com/emotivz/
+ 
+ https://www.soundcloud.com/emotivz`,
+    },
   ]);
 };
