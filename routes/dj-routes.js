@@ -30,7 +30,10 @@ const filefilter = (_req, file, cb) => {
 
 const upload = multer({ storage, filefilter });
 
-router.route("/").post(upload.single("profile_image"), djController.register);
+router
+  .route("/")
+  .post(upload.single("profile_image"), djController.register)
+  .get(djController.all);
 router.route("/:userId").get(djController.single);
 
 module.exports = router;

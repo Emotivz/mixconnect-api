@@ -63,14 +63,14 @@ const register = async (req, res) => {
 
 const single = async (req, res) => {
   try {
-    const dj = await knex("djs").where({ user_id: req.params.userId });
-    if (dj.length === 0) {
+    const dj = await knex("djs").where({ user_id: req.params.userId }).first();
+    if (!dj) {
       return res.status(404).json({
         error: true,
         message: `DJ with the user ID: ${req.params.userId} is not found`,
       });
     }
-    res.status(200).json(dj[0]);
+    res.status(200).json(dj);
   } catch (error) {
     res.status(500).json({
       error: true,
@@ -80,4 +80,17 @@ const single = async (req, res) => {
   }
 };
 
-module.exports = { register, single };
+const all = async (_req, res) => {
+  try {
+    const allDjs = await knex("djs");
+    res.status(200).json(allDjs);
+  } catch (error) {
+    res.status(500).json({
+      error: true,
+      message: `Error fetching Djs`,
+      detail: `${error.message}`,
+    });
+  }
+};
+
+module.exports = { register, single, all };
