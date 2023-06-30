@@ -31,5 +31,12 @@ exports.seed = async function (knex) {
     { id: 23, dj_id: 5, genre_id: 2 },
     { id: 24, dj_id: 5, genre_id: 6 },
     { id: 25, dj_id: 5, genre_id: 11 },
+    { id: 26, dj_id: 6, genre_id: 2 },
+    { id: 27, dj_id: 6, genre_id: 3 },
+    { id: 28, dj_id: 6, genre_id: 4 },
+    { id: 29, dj_id: 6, genre_id: 5 },
+    { id: 30, dj_id: 6, genre_id: 6 },
+    { id: 31, dj_id: 6, genre_id: 10 },
+    { id: 32, dj_id: 6, genre_id: 11 },
   ]);
 };
