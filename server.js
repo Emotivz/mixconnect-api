@@ -14,11 +14,11 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Routes
-app.use("/api/profile", profileRouter);
-app.use("/api/genres", genreRouter);
-app.use("/api/users", userRouter);
-app.use("/api/djs", djRouter);
-app.use("/api/events", eventRouter);
+app.use("/profile", profileRouter);
+app.use("/genres", genreRouter);
+app.use("/users", userRouter);
+app.use("/djs", djRouter);
+app.use("/events", eventRouter);
 
 app.listen(PORT, () => {
   console.log(`Server starts on http://localhost:${PORT}`);

@@ -14,7 +14,7 @@ const register = async (req, res) => {
     user_id,
     dj_name,
     profile_image:
-      "http://localhost:8080/profile-images/placeholder-profile.jpg",
+      "https://mixconnectapi.emotivz.co.uk/profile-images/placeholder-profile.jpg",
     location,
     price,
     bio,
